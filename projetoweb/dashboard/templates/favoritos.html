@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en" style="overflow-x:hidden">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Projeto web</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Navbar-Right-Links-icons.css' %}">
+</head>
+
+<body>
+    <div></div>
+    <nav class="navbar navbar-expand-md bg-body py-3" style="background: rgb(23,88,184)!important;height: 60px;">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span style="color: rgb(255,255,255);">Visualizador De Dados Fotovoltaicos</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-2">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/favoritos"
+                            style="color: rgba(255,255,255,0.65);font-size:18px">Favoritos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="margin: 0;">
+        <div class="row">
+            <div class="col-md-12 col-lg-12" style="padding: 0;width: 100vw;">
+                <div style="width:100vw;background-color:rgb(246, 246, 248)">
+                    <h1 style="font-size:32px;color:rgb(14, 13, 13);margin-bottom: 20px;margin-left: 60px;padding-top: 20px;padding-bottom:30px;color: rgb(34,34,34);">Favoritos</h1>
+                </div>
+                <div class="table-responsive" style="margin-left: 50px;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>PVOUT</th>
+                                <th>DNI</th>
+                                <th>GHI</th>
+                                <th>GTI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for favs in fav %}
+                            
+                            <tr>
+                                <td>
+                                    <p style="margin: 0;font-size: 21px;color: rgb(40,40,40);">{{ favs.nome}}</p>
+                                    <p style="margin: 0;font-size: 17px;color: rgb(75,75,75);">{{ favs.localizacao.rua }}{{ favs.localizacao.cidade }}{{ favs.localizacao.estado }}</p>
+                                    <p style="margin: 0;font-size: 14px;color: rgb(75,75,75);">{{ favs.localizacao.latitude}}°, {{ favs.localizacao.longitude }}°</p>
+                                </td>
+                                <td>
+                                    <span style="font-size: 17px;font-weight: bold;color:#4d4d4d;">{{ favs.dados_energia.producao_fotovoltaica }}</span>
+                                    <span style="color:#4d4d4d;">kWh/kWp</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 17px;font-weight: bold;color:#4d4d4d;">{{ favs.dados_energia.irradiacao_direta_normal }}</span>
+                                    <span style="color:#4d4d4d;">kWh/m2</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 17px;font-weight: bold;color:#4d4d4d;">{{ favs.dados_energia.irradiacao_global_horizontal }}</span>
+                                    <span style="color:#4d4d4d;">kWh/m2</span>
+                                </td>
+                                <td>
+                                    <span style="font-size: 17px;font-weight: bold;color:#4d4d4d;">{{ favs.dados_energia.irradiacao_global_inclinada }}</span>
+                                    <span style="color:#4d4d4d;">kWh/m2</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-pk="{{ favs.pk }}">
+                                        Editar
+                                    </button>
+                                    
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editModalLabel">Editar Favorito</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" form="editForm" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+                $('#editModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget);
+                    var pk = button.data('pk');
+                    var modal = $(this);
+                    console.log("Teste");
+
+                    $.ajax({
+                        url: '/edit/' + pk,
+                        type: 'GET',
+                        success: function (data) {
+                            modal.find('.modal-body').html(data);
+                        },
+                        error: function (xhr, status, error) {
+                            modal.find('.modal-body').html('Erro ao carregar o formulário.');
+                        }
+                    });
+                });
+            });
+    </script>
+</body>
+
+</html>

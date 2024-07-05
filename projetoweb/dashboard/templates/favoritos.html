@@ -65,9 +65,9 @@
                                     <span style="color:#4d4d4d;">kWh/m2</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-pk="{{ favs.pk }}">
-                                        Editar
-                                    </button>
+                                    <a class="btn btn-danger btnDel" href="/delete/{{ favs.id }}">
+                                        Deletar
+                                    </a>
                                     
                                 </td>
                             </tr>
@@ -76,25 +76,7 @@
                             <tr></tr>
                         </tbody>
                     </table>
-                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="editModalLabel">Editar Favorito</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" form="editForm" class="btn btn-primary">Salvar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -103,27 +85,7 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script>
-        $(document).ready(function () {
-                $('#editModal').on('show.bs.modal', function (event) {
-                    var button = $(event.relatedTarget);
-                    var pk = button.data('pk');
-                    var modal = $(this);
-                    console.log("Teste");
-
-                    $.ajax({
-                        url: '/edit/' + pk,
-                        type: 'GET',
-                        success: function (data) {
-                            modal.find('.modal-body').html(data);
-                        },
-                        error: function (xhr, status, error) {
-                            modal.find('.modal-body').html('Erro ao carregar o formulário.');
-                        }
-                    });
-                });
-            });
-    </script>
+    <script src="{% static 'js/favoritos.js' %}"></script>
 </body>
 
 </html>

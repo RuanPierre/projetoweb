@@ -19,7 +19,7 @@ class DadosEnergia(models.Model):
 
 
     def __str__(self):
-        return self.producao_fotovoltaica
+        return str(self.producao_fotovoltaica)
 
 class Favoritos(models.Model):
     nome = models.CharField(max_length=150)

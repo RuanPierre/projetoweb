@@ -4,12 +4,13 @@
 }
 
 #fundo_404 {
-    background: url("../img/_7189914e-e8d6-4f7e-bca5-6540f74b5dd1.jpg") center / contain no-repeat;
+    background: url("../img/erro_404.jpg") center / contain no-repeat;
 }
 
 #fundo_500 {
-    background: url("../img/_7189914e-e8d6-4f7e-bca5-6540f74b5dd1.jpg") center / contain no-repeat;
+    background: url("../img/erro_500.jpg") center / contain no-repeat;
 }
+
 .navbar{
 
     height: 60px;

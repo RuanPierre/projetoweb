@@ -10,7 +10,7 @@ def cadastro(request):
    
     if request.method == 'POST':
         form = RegistroForm(request.POST) 
-        print(form)
+       
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -32,9 +32,8 @@ def entrar(request):
     
     elif request.method == 'POST':
         form = LoginForm(request.POST)
-        print(form)
+
         if form.is_valid():
-            print("form valido")
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request,username=username,password=password)

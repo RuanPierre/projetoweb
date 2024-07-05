@@ -17,10 +17,11 @@ var map = L.map('map').setView([-15.808110, -47.884321], 4);
 
     $('.loading-icon-principal').show();
     $('#endereco').hide();
-        $('#coords').hide();
-        $('#rua').hide();
-        $('#cidade').hide();
-        $('#estado').hide();
+    $('#coords').hide();
+    $('#rua').hide();
+    $('#cidade').hide();
+    $('#estado').hide();
+    $('.valores').hide();
     
     var latlng = e.latlng;
     // Envia uma requisição AJAX para o servidor
@@ -49,6 +50,7 @@ var map = L.map('map').setView([-15.808110, -47.884321], 4);
             $('#rua').show();
             $('#cidade').show();
             $('#estado').show();
+            $('.valores').show();
             /* Verificação do Endereço */
             if (typeof cidade == 'undefined') {
                 if (typeof estado == 'undefined') {
@@ -108,7 +110,6 @@ var map = L.map('map').setView([-15.808110, -47.884321], 4);
 }
     map.on('click', onMapClick);
     layer = null;
-    console.log("Layer antes do switch: ", layer);
     function Switch(nome) {
 
         var gif = '#loading-icon-' + nome
@@ -118,27 +119,28 @@ var map = L.map('map').setView([-15.808110, -47.884321], 4);
         $(button).hide();
 
     var arquivo = '/static/dados_energia/' + nome + '.tif';
-    console.log(arquivo);
+
     fetch(arquivo)
         .then(response => response.arrayBuffer())
         .then(arrayBuffer => {
         parseGeoraster(arrayBuffer).then(georaster => {
 
             if (layer != null) {
-                console.log("Layer dentro do if", layer)
+
                 map.removeLayer(layer);
                 layer = null;
             }
             else {
-                console.log("Primeiro mapa")
+
             }
-            console.log("Layer depois do if: ", layer);
+
 
             layer = new GeoRasterLayer({
                 georaster: georaster,
                 opacity: 0.7,
                 pixelValuesToColorFn: values => {
                     const value = values[0];
+                    if (value < 1000) return '#78D6A4';
                     if (value < 1100) return '#8BED6B';
                     if (value < 1200) return '#ABF056';
                     if (value < 1300) return '#EEF743';
@@ -149,6 +151,13 @@ var map = L.map('map').setView([-15.808110, -47.884321], 4);
                     if (value < 1800) return '#ED590E';
                     if (value < 1900) return '#D93523';
                     if (value < 2000) return '#B5163E';
+                    if (value < 2100) return '#8F0D47';
+                    if (value < 2200) return '#800A45';
+                    if (value < 2300) return '#700841';
+                    if (value < 2400) return '#61063B';
+                    if (value < 2500) return '#470334';
+                    if (value < 2600) return '#3D022E';
+                    if (value < 2700) return '#330128';
                     return 'rgba(0, 0, 0, 0)';
                 },
                 resolution: 128
@@ -161,4 +170,17 @@ var map = L.map('map').setView([-15.808110, -47.884321], 4);
 
 }
 
-    Switch('pvout');
+Switch('pvout');
+    
+$(document).ready(function () {
+    function resetColors() {
+        $('.color-button').css('color', 'black');
+    }
+
+    $('.color-button').click(function () {
+
+        resetColors();
+
+        $(this).css('color', '#165ecd');
+    });
+});

@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse
+from django.template.loader import render_to_string
 import json
 from dashboard.forms import FavoritosForm
 from .models import DadosEnergia, Localizacao, Favoritos
@@ -50,17 +51,10 @@ def create(request):
         form = FavoritosForm()
     return render(request, 'home.html', {'form': form})
 
-def edit(request, pk):
-    fav = get_object_or_404(Favoritos, pk=pk)
-    if request.method == 'POST':
-        form = FavoritosForm(request.POST, instance=fav)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'success': True})
-    else:
-        form = FavoritosForm(instance=fav)
-    return render(request, 'edit.html', {'form': form})
-
+def delete(request, pk):
+    fav = Favoritos.objects.get(pk=pk)
+    fav.delete()
+    return redirect('favoritos')
 
 def dados_fotovoltaicos(request):
     try:

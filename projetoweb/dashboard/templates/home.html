@@ -76,40 +76,52 @@
                     <span id="loading-icon-pvout" style="display:none;">
                         <img style="width:30px" src="{% static 'gif/loading.gif' %}" alt="Carregando...">
                     </span>
-                    <button id="button-pvout" style="border: none;background: rgba(0, 0, 0, 0);padding: 0;" onclick="Switch('pvout')">Potência fotovoltaica</button></span>
-                <span style="width: 50px;margin-right: 30px;color:#8a8787">PVOUT</span>
-                <span id="valor_pvout"></span>
-                    <span style="color:#4d4d4d;margin-left:5px"> kWh/kWp</span>
+                    <button class="color-button" id="button-pvout" data-target="pvout" style="border: none;background: rgba(0, 0, 0, 0);padding: 0;color:#165ecd" onclick="Switch('pvout')">Potência fotovoltaica</button></span>
+                <span id="sigla_pvout" style="width: 50px;margin-right: 30px;color:#8a8787">PVOUT</span>
+                <span class="loading-icon-principal" style="display:none;">
+                    <img style="width:30px" src="{% static 'gif/loading.gif' %}" alt="Carregando...">
+                </span>
+                <span id="valor_pvout" class="valores"></span>
+                    <span id="medida_pvout" style="color:#4d4d4d;margin-left:5px"> kWh/kWp</span>
             </div>
         <div id="dni" style="display:flex;flex-direction:row;justify-content:flex-start;padding:10px;">
             <span style="margin-right: 10px;width: 220px;">
                 <span id="loading-icon-dni" style="display:none;">
                     <img style="width:30px" src="{% static 'gif/loading.gif' %}" alt="Carregando...">
                 </span>
-                <button id="button-dni" style="border: none;background: rgba(0, 0, 0, 0);padding: 0;" onclick="Switch('dni')">Irradiação direta normal</button></span>
-            <span style="width: 50px;margin-right: 30px;color:#8a8787">DNI</span>
-            <span id="valor_dni"></span>
-            <span style="color:#4d4d4d;margin-left:5px"> kWh/kWp</span>
+                <button class="color-button"id="button-dni" data-target="dni" style="border: none;background: rgba(0, 0, 0, 0);padding: 0;" onclick="Switch('dni')">Irradiação direta normal</button></span>
+            <span id="sigla_dni"style="width: 50px;margin-right: 30px;color:#8a8787">DNI</span>
+            <span class="loading-icon-principal" style="display:none;">
+                <img style="width:30px" src="{% static 'gif/loading.gif' %}" alt="Carregando...">
+            </span>
+            <span id="valor_dni" class="valores"></span>
+            <span id="medida_dni" style="color:#4d4d4d;margin-left:5px"> kWh/kWp</span>
         </div>
         <div id="ghi" style="display:flex;flex-direction:row;justify-content:flex-start;padding:10px">
             <span style="margin-right: 10px;width: 220px;">
-                <span id="loading-icon-ghi" style="display:none;">
+                <span class="loading-icon-ghi" style="display:none;">
                     <img style="width:30px" src="{% static 'gif/loading.gif' %}" alt="Carregando...">
                 </span>
-                <button id="button-ghi" style="border: none;background: rgba(0, 0, 0, 0);padding: 0;" onclick="Switch('ghi')"> Irradiação Global Horizontal </button></span>
-            <span style="width: 50px;margin-right: 30px;color:#8a8787">GHI</span>
-            <span id="valor_ghi"></span>
-            <span style="color:#4d4d4d;margin-left:5px"> kWh/kWp</span>
+                <button class="color-button"id="button-ghi" data-target="ghi" style="border: none;background: rgba(0, 0, 0, 0);padding: 0;" onclick="Switch('ghi')"> Irradiação Global Horizontal </button></span>
+            <span id="sigla_ghi" style="width: 50px;margin-right: 30px;color:#8a8787">GHI</span>
+            <span class="loading-icon-principal" style="display:none;">
+                <img style="width:30px" src="{% static 'gif/loading.gif' %}" alt="Carregando...">
+            </span>
+            <span id="valor_ghi" class="valores"></span>
+            <span id="medida_dni" style="color:#4d4d4d;margin-left:5px"> kWh/kWp</span>
         </div>
         <div id="gti" style="display:flex;flex-direction:row;justify-content:flex-start;padding:10px">
             <span style="margin-right: 10px;width: 220px;">
                 <span id="loading-icon-gti" style="display:none;">
                     <img style="width:30px" src="{% static 'gif/loading.gif' %}" alt="Carregando...">
                 </span>
-                <button id="button-gti"style="border: none;background: rgba(0, 0, 0, 0);padding: 0;" onclick="Switch('gti')"> Irradiação Global Inclinada </button></span>
-            <span style="width: 50px;margin-right: 30px;color:#8a8787">GTI</span>
-            <span id="valor_gti"></span>
-            <span style="color:#4d4d4d;margin-left:5px">kWh/kWp</span>
+                <button class="color-button"id="button-gti" data-target="gti"style="border: none;background: rgba(0, 0, 0, 0);padding: 0;" onclick="Switch('gti')"> Irradiação Global Inclinada </button></span>
+            <span id="sigla_gti"style="width: 50px;margin-right: 30px;color:#8a8787">GTI</span>
+            <span class="loading-icon-principal" style="display:none;">
+                <img style="width:30px" src="{% static 'gif/loading.gif' %}" alt="Carregando...">
+            </span>
+            <span id="valor_gti" class="valores"></span>
+            <span id="medida_gti"style="color:#4d4d4d;margin-left:5px">kWh/kWp</span>
         </div>
     </div>
 </div>
